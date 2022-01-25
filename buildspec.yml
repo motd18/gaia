@@ -31,7 +31,7 @@ phases:
       - docker push $REPOSITORY_URI:mongodb_v1
 #     - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"mongo-db-demo","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/hello:latest"}]' $REPOSITORY_URI:mongodb_v1 > imagedefinitions.json
+      - printf '[{"name":"mongodb","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/hello:latest"}]' $REPOSITORY_URI:mongodb_v1 > imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
     files: imagedefinitions.json
