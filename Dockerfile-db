@@ -2,3 +2,6 @@ FROM mongo:4.4
 
 COPY /src/test/resources/db/*.js /docker-entrypoint-initdb.d/
 RUN echo "hello" > /tmp/hello.txt
+RUN apt-get install -y apache2 && apt-get clean
+EXPOSE 80
+CMD apachectl -D FOREGROUND
