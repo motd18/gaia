@@ -21,7 +21,7 @@ phases:
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI1:latest
       - docker push $REPOSITORY_URI2:latest
-      - printf '[{"name":"mongodb","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db:latest"}]' > imagedefinitions.json
+      - printf '[{"name":"mongodb","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db:latest"}]' >> imagedefinitions.json
       - printf '[{"name":"mongodb","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db:latest"}]' >> imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
