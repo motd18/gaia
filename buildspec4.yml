@@ -1,0 +1,28 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 764057086582.dkr.ecr.ap-south-1.amazonaws.com
+      - REPOSITORY_URI1=764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db
+      - REPOSITORY_URI2=764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-app-demo
+  build:
+    commands:
+      - echo Build started on date
+      - echo Building the Docker image...
+      - docker build -t  mongodb:v1 -f Dockerfile-db .
+      - docker tag mongodb:v1 $REPOSITORY_URI1:latest
+      - docker build -t  gaia-server:v1  .
+      - docker tag gaia-server:v1 $REPOSITORY_URI2:latest
+  post_build:
+    commands:
+      - echo Build completed on date
+      - echo Pushing the Docker image...
+      - docker push $REPOSITORY_URI1:latest
+      - docker push $REPOSITORY_URI2:latest
+      - printf '[{"name":"mongodb","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db:latest"}]' > imagedefinitions.json
+      - printf '[{"name":"gaia-server","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-app-demo:latest"}]' >> imagedefinitions.json
+      - cat imagedefinitions.json 
+artifacts:
+    files: imagedefinitions.json
