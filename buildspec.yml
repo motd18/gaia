@@ -13,7 +13,7 @@ phases:
       - echo Building the Docker image...
       - docker build -t  mongodb:v1 -f Dockerfile-db .
       - docker tag mongodb:v1 $REPOSITORY_URI1:latest
-      -  docker build -t  gaia-server:v1  .
+      - docker build -t  gaia-server:v1  .
       - docker tag gaia-server:v1 $REPOSITORY_URI2:latest
   post_build:
     commands:
