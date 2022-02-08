@@ -11,18 +11,18 @@ phases:
     commands:
       - echo Build started on date
       - echo Building the Docker image...
-      - docker build -t  mongodb:v1 -f Dockerfile-db .
-      - docker tag mongodb:v1 $REPOSITORY_URI1:latest
-      - docker build -t  gaia-server:v1  .
-      - docker tag gaia-server:v1 $REPOSITORY_URI2:latest
+      - docker build -t gaia-db -f Dockerfile-db .
+      - docker tag gaia-db:latest $REPOSITORY_URI1:db-1
+      - docker build -t gaia .
+      - docker tag gaia:latest $REPOSITORY_URI2:server-1
   post_build:
     commands:
       - echo Build completed on date
       - echo Pushing the Docker image...
-      - docker push $REPOSITORY_URI1:latest
-      - docker push $REPOSITORY_URI2:latest
-      - printf '[{"name":"mongodb","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db:latest"}]' >> imagedefinitions.json
-      - printf '[{"name":"mongodb","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db:latest"}]' >> imagedefinitions.json
+      - docker push $REPOSITORY_URI1:db-1
+      - docker push $REPOSITORY_URI2:server-1
+      - printf '[{"name":"mongodb","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db:db-1"}]' >> imagedefinitions.json
+      - printf '[{"name":"gaia-server","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-app-demo:server-1"}]' >> imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
     files: imagedefinitions.json
