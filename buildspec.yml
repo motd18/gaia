@@ -9,7 +9,7 @@ phases:
       - REPOSITORY_URI2=764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-app-demo
   build:
     commands:
-      - echo Build started on $(date)
+      - echo Build started on date
       - echo Building the Docker image...
       - docker build -t gaia-db -f Dockerfile-db .
       - docker tag gaia-db:latest $REPOSITORY_URI1:db-1
