@@ -10,8 +10,8 @@ phases:
     commands:
       - echo Build started on date
       - echo Building the Docker image....
-     # - docker build -t gaia-db:v1 -f Dockerfile-db .
-   #  - docker tag gaia-db:v1 $REPOSITORY_URI1:db-1
+      - docker build -t gaia-db:v1 -f Dockerfile-db .
+      - docker tag gaia-db:v1 $REPOSITORY_URI1:db-1
       - docker build -t gaia:v1 .
       - docker tag gaia:v1 $REPOSITORY_URI2:server-1
   post_build:
