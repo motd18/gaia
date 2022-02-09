@@ -17,7 +17,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on date
-      - echo Pushing the Docker image...
+      - echo Pushing the Docker image....
       - docker push $REPOSITORY_URI1:db-1
       - docker push $REPOSITORY_URI2:server-1
       - printf '[{"name":"mongodb","imageUri":"764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db:db-1"}]' >> imagedefinitions.json
