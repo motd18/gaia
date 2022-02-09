@@ -3,7 +3,6 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 764057086582.dkr.ecr.ap-south-1.amazonaws.com
       - REPOSITORY_URI1=764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-db
       - REPOSITORY_URI2=764057086582.dkr.ecr.ap-south-1.amazonaws.com/gaia-server
